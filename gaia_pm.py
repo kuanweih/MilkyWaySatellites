@@ -55,7 +55,7 @@ def savetxt_gaia_pm_nstar(dict_joint):
     dict_joint['pmdec_2rh'] = np.array(pmdec2rh)
 
     df = pd.DataFrame(dict_joint)
-    df.to_csv('dwarfs_pms.csv')
+    df.to_csv('dwarf-csvs/dwarfs_pms.csv')
 
 
 
@@ -64,12 +64,13 @@ def savetxt_gaia_pm_nstar(dict_joint):
     dict_joint['Nstar_per_rhdeg3'] = dict_joint['Nstar_rh'] / dict_joint['rh_deg']**3
 
     df = pd.DataFrame(dict_joint)
-    df.to_csv('dwarfs_detail.csv')
+    df.to_csv('dwarf-csvs/dwarfs_detail.csv')
 
 
 
 if __name__ == '__main__':
 
+    print('Loading the original dwarf csv file...\n')
     dict_joint = pd.read_csv('ori-dwarfs/ori-dwarfs.csv')
     dict_joint = dict_joint.drop(columns=['Unnamed: 0'])
 
