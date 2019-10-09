@@ -15,6 +15,8 @@ def get_dic_list_npy(path: str, quantitys: str) -> Dict:
     dict_need = {q: dwarfs_dict[q] for q in quantitys}
     return  dict_need
 
+def deg_to_pc_w_dist(x_deg, x_dist_pc):
+    return  x_deg * 2. * np.pi / 360. * x_dist_pc
 
 
 if __name__ == '__main__':
@@ -31,8 +33,9 @@ if __name__ == '__main__':
 
     dict_joint = {q: np.concatenate((dict1[q], dict2[q])) for q in quantitys}
 
-    dict_joint['rh_pc'] = dict_joint['rh(arcmins)'] / 60.
-    dict_joint['rh_pc'] *= 2. * np.pi / 360. * dict_joint['Distance_pc']
+    dict_joint['rh_deg'] = dict_joint['rh(arcmins)'] / 60.
+    dict_joint['rh_pc'] = deg_to_pc_w_dist(dict_joint['rh_deg'],
+                                           dict_joint['Distance_pc'])
 
     print('Saving txt files and npy files\n')
     np.save("dwarfs-joint", dict_joint)
